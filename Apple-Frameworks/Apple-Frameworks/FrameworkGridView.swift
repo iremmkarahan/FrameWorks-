@@ -1,0 +1,62 @@
+//
+//  FrameworkGridView.swift
+//  Apple-Frameworks
+//
+//  Created by İreemmmm on 22.09.2025.
+//
+
+import SwiftUI
+
+struct FrameworkGridView: View {
+    
+    let columns: [GridItem] = [GridItem(.flexible()),
+                               GridItem(.flexible()),
+                               GridItem(.flexible())]
+  
+    var body: some View {
+        LazyVGrid(columns: columns){
+            ForEach(MockData.frameworks, id: \.id) { framework in // take the object at a framework and hash it  and give it its own kind of identifier ( i am talking about /.self)
+                FrameworkTitleView(imageName: framework.imageName, imageText: framework.name)
+            }
+           
+    
+            
+        }
+        
+        
+       
+    }
+    
+}
+
+
+
+
+struct FrameworkTitleView: View {
+    
+    let imageName: String
+    let imageText: String
+    
+  var body: some View {
+        VStack {
+            Image(imageName)
+                .resizable()
+                .frame(width: 90, height: 90)
+            
+            Text(imageText)
+                .font(.title2)
+                .fontWeight(.semibold)
+                .scaledToFit()
+                .minimumScaleFactor(0.6)
+        }
+       
+    }
+}
+
+
+   
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        FrameworkGridView()
+    }
+}
